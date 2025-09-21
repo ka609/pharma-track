@@ -1,0 +1,33 @@
+<div class="container mt-3">
+  <h2>Historique des ventes</h2>
+  <button class="btn btn-primary mb-2" (click)="addNew()">Nouvelle vente</button>
+
+  <div *ngIf="loading">Chargement...</div>
+
+  <table *ngIf="!loading && sales.length > 0" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Médicament</th>
+        <th>Quantité</th>
+        <th>Total (CFA)</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sale of sales">
+        <td>{{ sale.medicineName }}</td>
+        <td>{{ sale.quantity }}</td>
+        <td>{{ sale.totalPrice | number:'1.0-0' }}</td>
+        <td>{{ sale.date | date:'short' }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="delete(sale)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && sales.length === 0" class="alert alert-info">
+    Aucune vente enregistrée.
+  </div>
+</div>

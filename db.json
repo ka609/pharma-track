@@ -1,0 +1,13 @@
+{
+  "medicines": [],
+  "sales": [],
+  "users": [
+    {
+      "id": "aba2",
+      "name": "Kassongo Moussa",
+      "email": "moussakassongo6@gmail.com",
+      "password": "kaSS11on",
+      "role": "admin"
+    }
+  ]
+}

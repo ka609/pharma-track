@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <h3>Médicaments</h3>
+    <button class="btn btn-success" (click)="addNew()">+ Nouveau</button>
+  </div>
+
+  <div *ngIf="loading" class="mt-3">Chargement...</div>
+
+  <table *ngIf="!loading && medicines.length > 0" class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Catégorie</th>
+        <th>Prix (CFA)</th>
+        <th>Stock</th>
+        <th>Expiration</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of medicines">
+        <td>{{ m.name }}</td>
+        <td>{{ m.category }}</td>
+        <td>{{ m.price | number }}</td>
+        <td>
+          <span [ngClass]="{ 'text-danger fw-bold': m.stock < 10 }">{{ m.stock }}</span>
+          <span *ngIf="m.stock < 10" class="badge bg-danger ms-2">Faible</span>
+        </td>
+        <td>{{ m.expiryDate }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="edit(m)">Modifier</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(m)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && medicines.length === 0" class="mt-3">Aucun médicament trouvé.</div>
+</div>
