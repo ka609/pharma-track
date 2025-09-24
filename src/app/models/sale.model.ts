@@ -1,8 +1,10 @@
 export interface Sale {
   id?: number;
   medicineId: number;
-  medicineName?: string; // Optionnel pour affichage
+  medicineName?: string; 
   quantity: number;
-  totalPrice?: number;   // Calculé automatiquement
-  date: string;          // ISO string
+  category?: string;
+  unitPrice: number;
+  totalPrice?: number;   
+  date: string;          
 }

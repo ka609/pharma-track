@@ -8,11 +8,12 @@ import { DecimalPipe, DatePipe, CommonModule } from '@angular/common';
   selector: 'app-sales-list',
   templateUrl: './sales-list.html',
   standalone: true,
-  imports: [CommonModule, DecimalPipe, DatePipe]
+  imports: [CommonModule, DecimalPipe]
 })
 export class SalesListComponent implements OnInit {
   sales: Sale[] = [];
   loading = false;
+  dailyRevenue: number = 0; // chiffre d’affaires du jour
 
   constructor(private salesService: SalesService, private router: Router) {}
 
@@ -23,9 +24,21 @@ export class SalesListComponent implements OnInit {
   fetchSales() {
     this.loading = true;
     this.salesService.getAll().subscribe({
-      next: (data) => { this.sales = data; this.loading = false; },
+      next: (data) => { 
+        // ⚡ calcul du prix total par vente et du chiffre d’affaires
+        this.sales = data.map(sale => ({
+          ...sale,
+          totalPrice: sale.quantity * sale.unitPrice   // recalcul automatique
+        }));
+        this.calculateDailyRevenue();
+        this.loading = false; 
+      },
       error: () => { this.loading = false; }
     });
+  }
+
+  calculateDailyRevenue() {
+    this.dailyRevenue = this.sales.reduce((sum, sale) => sum + (sale.totalPrice || 0), 0);
   }
 
   addNew() {
@@ -33,11 +46,8 @@ export class SalesListComponent implements OnInit {
   }
 
   delete(sale: Sale) {
-   if (sale.id !== undefined && confirm('Voulez-vous vraiment supprimer cette vente ?')) {
-     this.salesService.delete(sale.id).subscribe(() => this.fetchSales());
+    if (sale.id !== undefined && confirm('Voulez-vous vraiment supprimer cette vente ?')) {
+      this.salesService.delete(sale.id).subscribe(() => this.fetchSales());
+    }
   }
 }
-
-}
-
-

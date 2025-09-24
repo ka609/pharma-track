@@ -1,33 +1,62 @@
-<div class="container mt-3">
-  <h2>Historique des ventes</h2>
-  <button class="btn btn-primary mb-2" (click)="addNew()">Nouvelle vente</button>
+<div class="container mt-4">
+  <!-- Card principale -->
+  <div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+      <h5 class="mb-0 d-flex align-items-center gap-2">
+        <i class="bi bi-receipt"></i> Ventes du jour
+      </h5>
+      <button class="btn btn-light btn-sm d-flex align-items-center gap-1" (click)="addNew()">
+        <i class="bi bi-plus-circle"></i> Nouvelle vente
+      </button>
+    </div>
 
-  <div *ngIf="loading">Chargement...</div>
+    <div class="card-body">
+      <!-- Loader -->
+      <div *ngIf="loading" class="text-center my-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+        <p class="mt-2">Chargement des ventes...</p>
+      </div>
 
-  <table *ngIf="!loading && sales.length > 0" class="table table-striped">
-    <thead>
-      <tr>
-        <th>Médicament</th>
-        <th>Quantité</th>
-        <th>Total (CFA)</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let sale of sales">
-        <td>{{ sale.medicineName }}</td>
-        <td>{{ sale.quantity }}</td>
-        <td>{{ sale.totalPrice | number:'1.0-0' }}</td>
-        <td>{{ sale.date | date:'short' }}</td>
-        <td>
-          <button class="btn btn-sm btn-danger" (click)="delete(sale)">Supprimer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      <!-- Tableau des ventes -->
+      <div *ngIf="!loading && sales.length > 0" class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-success">
+            <tr>
+              <th><i class="bi bi-capsule"></i> Médicament</th>
+              <th><i class="bi bi-hash"></i> Quantité</th>
+              <th><i class="bi bi-currency-dollar"></i> Prix Total (CFA)</th>
+              <th><i class="bi bi-calendar-event"></i> Date</th>
+              <th><i class="bi bi-gear"></i> Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of sales">
+              <td>{{ sale.medicineName }}</td>
+              <td>{{ sale.quantity }}</td>
+              <td>{{ sale.totalPrice | number:'1.0-0' }}</td>
+              <td>{{ sale.date }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center" (click)="delete(sale)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <div *ngIf="!loading && sales.length === 0" class="alert alert-info">
-    Aucune vente enregistrée.
+      <!-- Revenu du jour -->
+      <div *ngIf="!loading && sales.length > 0" class="alert alert-success mt-3 d-flex align-items-center gap-2">
+        <i class="bi bi-cash-stack"></i>
+        <strong>Revenu du jour :</strong> {{ dailyRevenue | number:'1.0-0' }} CFA
+      </div>
+
+      
+      <div *ngIf="!loading && sales.length === 0" class="alert alert-info d-flex align-items-center gap-2">
+        <i class="bi bi-info-circle"></i> Aucune vente enregistrée.
+      </div>
+    </div>
   </div>
 </div>

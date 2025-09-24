@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Pharma-Track</a>
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
+      <i class="bi bi-capsule"></i> Pharma-Track
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,32 +10,60 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Liens principaux -->
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-            Dashboard
+          <a class="nav-link d-flex align-items-center gap-2" 
+             routerLink="/" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact:true}">
+            <i class="bi bi-speedometer2"></i> Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/medicines" routerLinkActive="active">Médicaments</a>
+          <a class="nav-link d-flex align-items-center gap-2" routerLink="/medicines" routerLinkActive="active">
+            <i class="bi bi-capsule-pill"></i> Médicaments
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/sales" routerLinkActive="active">Ventes</a>
+          <a class="nav-link d-flex align-items-center gap-2" routerLink="/sales" routerLinkActive="active">
+            <i class="bi bi-cart-check"></i> Ventes
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/users" routerLinkActive="active">Utilisateurs</a>
+          <a class="nav-link d-flex align-items-center gap-2" routerLink="/users" routerLinkActive="active">
+            <i class="bi bi-people"></i> Utilisateurs
+          </a>
         </li>
       </ul>
 
+      <!-- Boutons à droite -->
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+        <!-- Paramètres : seulement admin -->
+        <li class="nav-item" *ngIf="auth.getRole() === 'admin'">
+          <a class="nav-link d-flex align-items-center gap-2" routerLink="/change-credentials">
+            <i class="bi bi-gear"></i> Paramètres
+          </a>
+        </li>
+
+        <!-- Déconnexion : visible si connecté -->
+        <li class="nav-item" *ngIf="auth.isLoggedIn()">
+          <button class="btn btn-danger d-flex align-items-center gap-2" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Déconnecter
+          </button>
+        </li>
+
+        <!-- Login : visible si non connecté -->
+        <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+          <a class="nav-link d-flex align-items-center gap-2" routerLink="/login">
+            <i class="bi bi-key"></i> Login
+          </a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="container mt-4">
+<div class="container mt-4 mx-auto" style="max-width: 1200px;">
   <router-outlet></router-outlet>
 </div>

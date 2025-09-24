@@ -1,5 +1,86 @@
 {
-  "medicines": [],
+  "medicines": [
+  {
+    "id": "1",
+    "name": "Paracétamol 500mg",
+    "category": "Analgésique",
+    "price": 50,
+    "stock": 97,
+    "expiryDate": "2026-05-12"
+  },
+  {
+    "id": "2",
+    "name": "Ibuprofène 400mg",
+    "category": "Anti-inflammatoire",
+    "price": 100,
+    "stock": 74,
+    "expiryDate": "2026-03-08"
+  },
+  {
+    "id": "3",
+    "name": "Amoxicilline 500mg",
+    "category": "Antibiotique",
+    "price": 75,
+    "stock": 54,
+    "expiryDate": "2025-12-01"
+  },
+  {
+    "id": "4",
+    "name": "Aspirine 100mg",
+    "category": "Analgésique / Anti-inflammatoire",
+    "price": 200,
+    "stock": 114,
+    "expiryDate": "2027-01-10"
+  },
+  {
+    "id": "5",
+    "name": "Vitamine C 1000mg",
+    "category": "Supplément",
+    "price": 200,
+    "stock": 90,
+    "expiryDate": "2026-09-21"
+  },
+  {
+    "id": "6",
+    "name": "Loratadine 10mg",
+    "category": "Antihistaminique",
+    "price": 50,
+    "stock": 63,
+    "expiryDate": "2025-11-15"
+  },
+  {
+    "id": "7",
+    "name": "Metformine 850mg",
+    "category": "Antidiabétique",
+    "price": 150,
+    "stock": 48,
+    "expiryDate": "2027-04-30"
+  },
+  {
+    "id": "8",
+    "name": "Oméprazole 20mg",
+    "category": "Anti-ulcéreux",
+    "price": 200,
+    "stock": 65,
+    "expiryDate": "2026-02-18"
+  },
+  {
+    "id": "9",
+    "name": "Salbutamol Inhalateur",
+    "category": "Bronchodilatateur",
+    "price": 100,
+    "stock": 40,
+    "expiryDate": "2025-08-05"
+  },
+  {
+    "id": "10",
+    "name": "Diclofénac 50mg",
+    "category": "Anti-inflammatoire",
+    "price": 50,
+    "stock": 58,
+    "expiryDate": "2026-12-12"
+  }
+]  ,
   "sales": [],
   "users": [
     {

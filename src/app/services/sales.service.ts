@@ -8,39 +8,61 @@ import { map } from 'rxjs/operators';
 export class SalesService {
   private sales: Sale[] = [];
 
-  constructor(private medicineService: MedicineService) {}
+  constructor(private medicineService: MedicineService) {
+    this.loadSales(); 
+  }
+
+  private saveSales() {
+    localStorage.setItem('sales', JSON.stringify(this.sales));
+  }
+
+  // ✅ Chargement des ventes sauvegardées
+  private loadSales() {
+    const saved = localStorage.getItem('sales');
+    if (saved) {
+      this.sales = JSON.parse(saved);
+    }
+  }
 
   getAll(): Observable<Sale[]> {
-    // Ajoute le nom du médicament pour affichage
     return this.medicineService.getAll().pipe(
-      map(meds => 
-        this.sales.map(sale => ({
+      map(meds => this.sales.map(sale => {
+        const med = meds.find(m => m.id === sale.medicineId);
+        return {
           ...sale,
-          medicineName: meds.find(m => m.id === sale.medicineId)?.name,
-          totalPrice: (meds.find(m => m.id === sale.medicineId)?.price || 0) * sale.quantity
-        }))
-      )
+          medicineName: med ? med.name : sale.medicineName || 'Inconnu',
+          category: med ? med.category : sale.category || 'Non défini',
+          unitPrice: med ? med.price : sale.unitPrice || 0,
+          totalPrice: sale.quantity * (med ? med.price : sale.unitPrice || 0)
+        };
+      }))
     );
   }
 
   create(sale: Sale): Observable<Sale> {
     sale.id = this.sales.length + 1;
-    sale.date = new Date().toISOString();
-    this.sales.push(sale);
+    sale.date = new Date().toLocaleString('fr-FR');
 
-    // Décrémente le stock du médicament
     this.medicineService.getById(sale.medicineId).subscribe(med => {
       if (med) {
-        med.stock = med.stock - sale.quantity;
+        sale.unitPrice = med.price;
+        sale.totalPrice = med.price * sale.quantity;
+        sale.category = med.category;
+
+        // Décrémente le stock
+        med.stock -= sale.quantity;
         this.medicineService.update(med).subscribe();
       }
     });
 
+    this.sales.push(sale);
+    this.saveSales(); // ✅ persiste après ajout
     return of(sale);
   }
 
   delete(id: number): Observable<void> {
     this.sales = this.sales.filter(s => s.id !== id);
+    this.saveSales(); // ✅ met à jour après suppression
     return of(void 0);
   }
 }

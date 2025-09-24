@@ -1,26 +1,84 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard';
-import { MedicineListComponent } from './components/medicine-list/medicine-list';
-import { MedicineFormComponent } from './components/medicine-form/medicine-form';
-import { SalesListComponent } from './components/sales-list/sales-list';
-import { SalesFormComponent } from './components/sales-form/sales-form';
-import { LoginComponent } from './components/login/login';
-import { UserFormComponent } from './components/user-form/user-form';
-import { UsersListComponent } from './components/user-list/user-list';
+import { authGuard } from './core/auth.guard';
+import { adminGuard } from './core/admin.guard';
 
 export const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
-  // Médicaments
-  { path: 'medicines', component: MedicineListComponent },
-  { path: 'medicines/new', component: MedicineFormComponent },
+  { // Dashboard accessible à tous les connectés
+    path: 'dashboard',
+    loadComponent: () => import('./components/dashboard/dashboard')
+      .then(m => m.DashboardComponent),
+    canActivate: [authGuard]
+  },
 
-  // Ventes
-  { path: 'sales', component: SalesListComponent },
-  { path: 'sales/new', component: SalesFormComponent },
+  { // Login public
+    path: 'login',
+    loadComponent: () => import('./components/login/login')
+      .then(m => m.LoginComponent)
+  },
 
-  // Utilisateurs
-  { path: 'users', component: UsersListComponent },
-  { path: 'users/new', component: UserFormComponent }
+  { // Médicaments accessibles uniquement à l'admin
+    path: 'medicines',
+    loadComponent: () => import('./components/medicine-list/medicine-list')
+      .then(m => m.MedicineListComponent),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'medicines/new',
+    loadComponent: () => import('./components/medicine-form/medicine-form')
+      .then(m => m.MedicineFormComponent),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'medicines/edit/:id',
+    loadComponent: () => import('./components/medicine-form/medicine-form')
+      .then(m => m.MedicineFormComponent),
+    canActivate: [authGuard, adminGuard]
+  },
+
+  { // Ventes accessibles à tous les connectés
+    path: 'sales',
+    loadComponent: () => import('./components/sales-list/sales-list')
+      .then(m => m.SalesListComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'sales/new',
+    loadComponent: () => import('./components/sales-form/sales-form')
+      .then(m => m.SalesFormComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'sales/edit/:id',
+    loadComponent: () => import('./components/sales-form/sales-form')
+      .then(m => m.SalesFormComponent),
+    canActivate: [authGuard]
+  },
+
+  { // Utilisateurs uniquement admin
+    path: 'users',
+    loadComponent: () => import('./components/user-list/user-list')
+      .then(m => m.UsersListComponent),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'users/new',
+    loadComponent: () => import('./components/user-form/user-form')
+      .then(m => m.UserFormComponent),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'users/edit/:id',
+    loadComponent: () => import('./components/user-form/user-form')
+      .then(m => m.UserFormComponent),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+  path: 'change-credentials',
+  loadComponent: () => import('./components/change-credentials/change-credentials')
+    .then(m => m.ChangeCredentialsComponent),
+  canActivate: [authGuard, adminGuard]
+}
+
 ];

@@ -33,7 +33,7 @@ export class UsersListComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.router.navigate(['/user-form', user.id]);
+    this.router.navigate(['/users/edit', user.id]);
   }
 
   delete(user: User) {

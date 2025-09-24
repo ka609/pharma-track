@@ -1,40 +1,71 @@
 <div class="container mt-4">
-  <h3>{{ editingId ? 'Modifier' : 'Nouveau' }} médicament</h3>
-
-  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-    <div class="mb-3">
-      <label class="form-label">Nom *</label>
-      <input class="form-control" formControlName="name" />
-      <div class="text-danger small" *ngIf="hasError('name','required')">Le nom est obligatoire.</div>
+  <!-- Card principale -->
+  <div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+      <h5 class="mb-0 d-flex align-items-center gap-2">
+        <i class="bi bi-capsule-pill"></i>
+        {{ editingId ? 'Modifier' : 'Nouveau' }} médicament
+      </h5>
+      <a class="btn btn-light btn-sm d-flex align-items-center gap-1" routerLink="/medicines">
+        <i class="bi bi-x-circle"></i> Annuler
+      </a>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Catégorie</label>
-      <input class="form-control" formControlName="category" />
-    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="mb-3">
+          <label class="form-label">Nom <span class="text-danger">*</span></label>
+          <input class="form-control" formControlName="name" placeholder="Nom du médicament"/>
+          <div class="text-danger small mt-1" *ngIf="hasError('name','required')">
+            <i class="bi bi-exclamation-circle-fill"></i> Le nom est obligatoire.
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label">Prix (CFA) *</label>
-      <input type="number" class="form-control" formControlName="price" />
-      <div class="text-danger small" *ngIf="hasError('price','required')">Le prix est obligatoire.</div>
-      <div class="text-danger small" *ngIf="hasError('price','min')">Le prix doit être supérieur à 0.</div>
-    </div>
+        <div class="mb-3">
+          <label class="form-label">Catégorie</label>
+          <input class="form-control" formControlName="category" placeholder="Catégorie du médicament"/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label">Stock *</label>
-      <input type="number" class="form-control" formControlName="stock" />
-      <div class="text-danger small" *ngIf="hasError('stock','required')">Le stock est obligatoire.</div>
-      <div class="text-danger small" *ngIf="hasError('stock','min')">Le stock ne peut pas être négatif.</div>
-    </div>
+        <div class="mb-3">
+          <label class="form-label">Prix (CFA) <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" formControlName="price" placeholder="0"/>
+          <div class="text-danger small mt-1" *ngIf="hasError('price','required')">
+            <i class="bi bi-exclamation-circle-fill"></i> Le prix est obligatoire.
+          </div>
+          <div class="text-danger small mt-1" *ngIf="hasError('price','min')">
+            <i class="bi bi-exclamation-circle-fill"></i> Le prix doit être supérieur à 0.
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label">Date d'expiration *</label>
-      <input type="date" class="form-control" formControlName="expiryDate" />
-      <div class="text-danger small" *ngIf="hasError('expiryDate','required')">La date d'expiration est requise.</div>
-      <div class="text-danger small" *ngIf="hasError('expiryDate','invalidDate')">Date invalide.</div>
-    </div>
+        <div class="mb-3">
+          <label class="form-label">Stock <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" formControlName="stock" placeholder="0"/>
+          <div class="text-danger small mt-1" *ngIf="hasError('stock','required')">
+            <i class="bi bi-exclamation-circle-fill"></i> Le stock est obligatoire.
+          </div>
+          <div class="text-danger small mt-1" *ngIf="hasError('stock','min')">
+            <i class="bi bi-exclamation-circle-fill"></i> Le stock ne peut pas être négatif.
+          </div>
+        </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="submitting">{{ editingId ? 'Mettre à jour' : 'Ajouter' }}</button>
-    <a class="btn btn-secondary ms-2" routerLink="/medicines">Annuler</a>
-  </form>
+        <div class="mb-4">
+          <label class="form-label">Date d'expiration <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" formControlName="expiryDate"/>
+          <div class="text-danger small mt-1" *ngIf="hasError('expiryDate','required')">
+            <i class="bi bi-exclamation-circle-fill"></i> La date d'expiration est requise.
+          </div>
+          <div class="text-danger small mt-1" *ngIf="hasError('expiryDate','invalidDate')">
+            <i class="bi bi-exclamation-circle-fill"></i> Date invalide.
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary d-flex align-items-center gap-1" type="submit" [disabled]="submitting">
+            <i class="bi bi-check-circle"></i>
+            {{ editingId ? 'Mettre à jour' : 'Ajouter' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

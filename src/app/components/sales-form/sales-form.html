@@ -1,43 +1,56 @@
-<div class="container mt-3">
-  <h2>Nouvelle vente</h2>
-
-  <!-- ✅ Alertes flottantes -->
-  <div *ngIf="successMessage" 
-       class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3"
-       role="alert"
-       style="z-index: 1050; min-width: 300px;">
-    {{ successMessage }}
-  </div>
-
-  <div *ngIf="errorMessage" 
-       class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3"
-       role="alert"
-       style="z-index: 1050; min-width: 300px;">
-    {{ errorMessage }}
-  </div>
-
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="mb-3">
-      <label>Médicament</label>
-      <select class="form-select" formControlName="medicineId">
-        <option value="">-- Choisir --</option>
-        <option *ngFor="let med of medicines" [value]="med.id">
-          {{ med.name }} (Stock: {{ med.stock }})
-        </option>
-      </select>
-      <div *ngIf="form.get('medicineId')?.touched && form.get('medicineId')?.invalid" class="text-danger">
-        Veuillez sélectionner un médicament
-      </div>
+<div class="container mt-4">
+  <!-- Card principale -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2">
+      <i class="bi bi-cart-plus"></i>
+      <h5 class="mb-0">Nouvelle vente</h5>
     </div>
 
-    <div class="mb-3">
-      <label>Quantité</label>
-      <input type="number" class="form-control" formControlName="quantity">
-      <div *ngIf="form.get('quantity')?.touched && form.get('quantity')?.invalid" class="text-danger">
-        Quantité invalide
+    <div class="card-body">
+      <!-- Alertes flottantes -->
+      <div *ngIf="successMessage"
+           class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3"
+           role="alert" style="z-index: 1050; min-width: 300px;">
+        <i class="bi bi-check-circle"></i> {{ successMessage }}
       </div>
-    </div>
 
-    <button class="btn btn-primary" [disabled]="submitting">Enregistrer</button>
-  </form>
+      <div *ngIf="errorMessage"
+           class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3"
+           role="alert" style="z-index: 1050; min-width: 300px;">
+        <i class="bi bi-exclamation-triangle"></i> {{ errorMessage }}
+      </div>
+
+      <!-- Formulaire -->
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label class="form-label d-flex align-items-center gap-1">
+            <i class="bi bi-capsule"></i> Médicament
+          </label>
+          <select class="form-select" formControlName="medicineId">
+            <option value="">-- Choisir --</option>
+            <option *ngFor="let med of medicines" [ngValue]="med.id">
+              {{ med.name }} (Stock: {{ med.stock }} | Prix: {{ med.price | number }} CFA)
+            </option>
+          </select>
+          <div *ngIf="form.get('medicineId')?.touched && form.get('medicineId')?.invalid" class="text-danger mt-1">
+            <i class="bi bi-exclamation-circle"></i> Veuillez sélectionner un médicament
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label d-flex align-items-center gap-1">
+            <i class="bi bi-hash"></i> Quantité
+          </label>
+          <input type="number" class="form-control" formControlName="quantity">
+          <div *ngIf="form.get('quantity')?.touched && form.get('quantity')?.invalid" class="text-danger mt-1">
+            <i class="bi bi-exclamation-circle"></i> Quantité invalide
+          </div>
+        </div>
+
+        <button class="btn btn-primary d-flex align-items-center gap-1" [disabled]="submitting">
+          <i class="bi bi-save"></i> Enregistrer
+        </button>
+      </form>
+    </div>
+  </div>
 </div>

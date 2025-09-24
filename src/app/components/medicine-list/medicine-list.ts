@@ -3,22 +3,25 @@ import { MedicineService } from '../../services/medicine.service';
 import { Medicine } from '../../models/medicine.model';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { filter } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { filter} from 'rxjs';
 
 @Component({
   selector: 'app-medicine-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   providers: [DecimalPipe],
   templateUrl: './medicine-list.html',
   styleUrls: ['./medicine-list.scss']
 })
 export class MedicineListComponent implements OnInit {
   medicines: Medicine[] = [];
+  filteredMedicines: Medicine[] = [];
+  searchTerm: string = '';
   loading = false;
 
   constructor(private medicineService: MedicineService, private router: Router) {
-    // ⚡ recharge la liste automatiquement après retour de navigation
+    // Recharge la liste automatiquement après retour de navigation
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => this.load());
@@ -32,7 +35,9 @@ export class MedicineListComponent implements OnInit {
     this.loading = true;
     this.medicineService.getAll().subscribe({
       next: (data) => {
+        // Trier par nom
         this.medicines = data.sort((a, b) => a.name.localeCompare(b.name));
+        this.filteredMedicines = [...this.medicines];
         this.loading = false;
       },
       error: () => {
@@ -40,6 +45,13 @@ export class MedicineListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  search() {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredMedicines = this.medicines.filter(m =>
+      m.name.toLowerCase().includes(term) || (m.category && m.category.toLowerCase().includes(term))
+    );
   }
 
   delete(med: Medicine) {

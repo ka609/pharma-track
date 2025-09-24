@@ -1,39 +1,99 @@
-<div class="text-center">
-  <h2>Bienvenue dans Pharma-Track 🚀</h2>
-  <p>Gérez vos médicaments, vos ventes et vos utilisateurs facilement.</p>
+<!-- Contenu principal du Dashboard -->
+<div class="container-fluid px-4 py-4" style="min-height: 85vh;">
 
-  <div class="row mt-4">
-    <!-- Médicaments -->
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Médicaments</h5>
-          <p class="card-text">Ajoutez, modifiez et surveillez vos stocks.</p>
-          <a routerLink="/medicines" class="btn btn-primary">Voir</a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Ventes -->
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Ventes</h5>
-          <p class="card-text">Enregistrez et suivez l’historique des ventes.</p>
-          <a routerLink="/sales" class="btn btn-success">Voir</a>
+  <!-- Row des cartes résumé -->
+  <div class="row g-4 text-center">
+    <!-- Chiffre d’affaires du jour -->
+    <div class="col-lg-4 col-md-6">
+      <div class="card bg-success text-white shadow-sm h-100 hover-scale" style="cursor: pointer;" [routerLink]="['/sales']">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <h5 class="card-title">
+            <i class="bi bi-cash-coin"></i> Chiffre d'affaires du jour
+          </h5>
+          <p class="display-4 fw-bold">{{ dailyRevenue | number:'1.0-0' }} FCFA</p>
+          <small class="text-white-50">Voir détails</small>
         </div>
       </div>
     </div>
 
-    <!-- Utilisateurs -->
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Utilisateurs</h5>
-          <p class="card-text">Gérez les comptes et les rôles.</p>
-          <a routerLink="/users" class="btn btn-warning">Voir</a>
+    <!-- Ventes du jour -->
+    <div class="col-lg-4 col-md-6">
+      <div class="card bg-info text-white shadow-sm h-100 hover-scale" style="cursor: pointer;" [routerLink]="['/sales']">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <h5 class="card-title">
+            <i class="bi bi-cart-check"></i> Ventes du jour
+          </h5>
+          <p class="display-4 fw-bold">{{ dailyQuantity }}</p>
+          <small class="text-white-50">Voir détails</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Médicaments en rupture -->
+    <div class="col-lg-4 col-md-6 mx-md-auto">
+      <div class="card bg-warning text-dark shadow-sm h-100 hover-scale" style="cursor: pointer;" [routerLink]="['/medicines']">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <h5 class="card-title">
+            <i class="bi bi-exclamation-triangle-fill"></i> Médicaments en rupture
+          </h5>
+          <p class="display-4 fw-bold">{{ lowStockMedicines.length }}</p>
+          <small class="text-dark-50">Voir détails</small>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Onglets statistiques et détail ventes -->
+  <ul class="nav nav-tabs mt-5" id="dashboardTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="sales-tab" data-bs-toggle="tab" data-bs-target="#sales" type="button" role="tab">
+        <i class="bi bi-graph-up"></i> Statistiques
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="low-stock-tab" data-bs-toggle="tab" data-bs-target="#low-stock" type="button" role="tab">
+        <i class="bi bi-box-seam"></i> Stocks faibles
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <!-- Graphique des ventes -->
+    <div class="tab-pane fade show active" id="sales" role="tabpanel">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light fw-bold">
+          <i class="bi bi-bar-chart-line-fill"></i> Ventes hebdomadaires
+        </div>
+        <div class="card-body">
+          <canvas baseChart 
+                  [data]="salesChartData" 
+                  [type]="salesChartType" 
+                  [options]="salesChartOptions"
+                  style="width:100%; height:400px;">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Médicaments proches de rupture -->
+    <div class="tab-pane fade" id="low-stock" role="tabpanel">
+      <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white fw-bold">
+          <i class="bi bi-exclamation-circle-fill"></i> Médicaments proches de rupture (stock < 10)
+        </div>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let med of lowStockMedicines" 
+              class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ med.name }}</span>
+            <span class="badge bg-danger rounded-pill">Stock: {{ med.stock }}</span>
+          </li>
+          <li *ngIf="lowStockMedicines.length === 0" 
+              class="list-group-item text-center text-success">
+            ✅ Aucun médicament en rupture
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </div>

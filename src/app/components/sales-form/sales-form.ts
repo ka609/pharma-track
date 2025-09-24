@@ -17,7 +17,6 @@ export class SalesFormComponent implements OnInit {
   medicines: Medicine[] = [];
   submitting = false;
 
-  // ✅ Messages flottants
   successMessage = '';
   errorMessage = '';
 
