@@ -45,11 +45,7 @@ json-server --watch db.json --port 3000
 ```
 
 
-👉 L’API sera disponible sur http://localhost:3000.
-Endpoints simulés :
-http://localhost:3000/medicines → gestion des médicaments
-http://localhost:3000/sales → gestion des ventes
-http://localhost:3000/users → gestion des utilisateurs
+👉 L’API sera disponible sur http://localhost:3000.  Endpoints simulés :  http://localhost:3000/medicines → gestion des médicaments  http://localhost:3000/sales → gestion des ventes  http://localhost:3000/users → gestion des utilisateurs
 
 5️⃣ Lancer l’application Angular
 ```bash
