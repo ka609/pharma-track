@@ -1,4 +1,4 @@
-📌 PharmaTrack — Gestion de Pharmacie (Angular)
+<h2📌 PharmaTrack — Gestion de Pharmacie (Angular)>
 📖 Contexte
 
 Dans les zones rurales au Burkina Faso, les dépôts pharmaceutiques manquent souvent d’outils numériques.
@@ -9,7 +9,7 @@ la gestion des ventes,
 les alertes automatiques en cas de rupture,
 un tableau de bord avec statistiques et indicateurs.
 
-🚀 Fonctionnalités
+<h3🚀 Fonctionnalités>
 
 Gestion des médicaments : CRUD complet (ajouter, modifier, supprimer, lister).
 Ventes : enregistrement des ventes, décrément automatique du stock, calcul du chiffre d’affaires.
@@ -17,7 +17,7 @@ Dashboard : chiffre d’affaires du jour, médicaments en rupture, graphique des
 Authentification simplifiée : admin / utilisateur avec guards.
 API REST mockée avec json-server.
 
-🛠️ Installation
+<h3🛠️ Installation>
 1️⃣ Prérequis
 
 Node.js (v18 ou plus recommandé) ;
@@ -45,7 +45,7 @@ json-server --watch db.json --port 3000
 ```
 
 
-👉 L’API sera disponible sur http://localhost:3000.<br>  Endpoints simulés :  http://localhost:3000/medicines → gestion des médicaments <br>  http://localhost:3000/sales → gestion des ventes <br> http://localhost:3000/users → gestion des utilisateurs
+👉 L’API sera disponible sur http://localhost:3000.<br>  Endpoints simulés :<br>  http://localhost:3000/medicines → gestion des médicaments <br>  http://localhost:3000/sales → gestion des ventes <br> http://localhost:3000/users → gestion des utilisateurs
 
 5️⃣ Lancer l’application Angular
 ```bash
@@ -53,30 +53,31 @@ ng serve
 ```
 
 
-👉 L’application sera disponible sur http://localhost:4200/.
-🔑 Authentification
+👉 L’application sera disponible sur http://localhost:4200/.<br>
 
-Deux types d’utilisateurs sont gérés :
-Admin → accès complet (stocks + utilisateurs + ventes).
+<h3🔑 Authentification>
+
+Deux types d’utilisateurs sont gérés : <br>
+Admin → accès complet (stocks + utilisateurs + ventes) <br>
 Utilisateur → accès limité (ventes et dashboard).
 
 
-📊 Aperçu rapide des pages
+<h3📊 Aperçu rapide des pages>
 
-Login : connexion admin / utilisateur
-Dashboard : statistiques principales (CA du jour, ventes, ruptures)
-Médicaments : gestion des stocks (admin uniquement)
-Ventes : enregistrement et suivi des ventes
+Login : connexion admin / utilisateur <br>
+Dashboard : statistiques principales (CA du jour, ventes, ruptures) <br>
+Médicaments : gestion des stocks (admin uniquement) <br>
+Ventes : enregistrement et suivi des ventes <br>
 Utilisateurs : gestion des comptes (admin uniquement)
 
-👨‍💻 Contribution
+<h3👨‍💻 Contribution>
 
 Fork le projet
-Crée une branche (git checkout -b feature/ma-fonctionnalite)
-Commit (git commit -m 'Ajout d’une nouvelle fonctionnalité')
-Push (git push origin feature/ma-fonctionnalite)
+Crée une branche (git checkout -b feature/ma-fonctionnalite) <br>
+Commit (git commit -m 'Ajout d’une nouvelle fonctionnalité') <br>
+Push (git push origin feature/ma-fonctionnalite) <br>
 Crée une Pull Request
 
-📜 Licence
+<h3📜 Licence>
 
 Projet académique, libre d’utilisation pour l’amélioration de la gestion des pharmacies locales.
