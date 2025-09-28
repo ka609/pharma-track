@@ -1,4 +1,4 @@
-<h2📌 PharmaTrack — Gestion de Pharmacie (Angular)>
+__📌 PharmaTrack — Gestion de Pharmacie (Angular)__
 📖 Contexte
 
 Dans les zones rurales au Burkina Faso, les dépôts pharmaceutiques manquent souvent d’outils numériques.
@@ -9,7 +9,7 @@ la gestion des ventes,
 les alertes automatiques en cas de rupture,
 un tableau de bord avec statistiques et indicateurs.
 
-<h3🚀 Fonctionnalités>
+__🚀 Fonctionnalités__
 
 Gestion des médicaments : CRUD complet (ajouter, modifier, supprimer, lister).
 Ventes : enregistrement des ventes, décrément automatique du stock, calcul du chiffre d’affaires.
@@ -17,7 +17,7 @@ Dashboard : chiffre d’affaires du jour, médicaments en rupture, graphique des
 Authentification simplifiée : admin / utilisateur avec guards.
 API REST mockée avec json-server.
 
-<h3🛠️ Installation>
+__🛠️ Installation__
 1️⃣ Prérequis
 
 Node.js (v18 ou plus recommandé) ;
@@ -55,14 +55,14 @@ ng serve
 
 👉 L’application sera disponible sur http://localhost:4200/.<br>
 
-<h3🔑 Authentification>
+__🔑 Authentification__
 
 Deux types d’utilisateurs sont gérés : <br>
 Admin → accès complet (stocks + utilisateurs + ventes) <br>
 Utilisateur → accès limité (ventes et dashboard).
 
 
-<h3📊 Aperçu rapide des pages>
+__📊 Aperçu rapide des pages__
 
 Login : connexion admin / utilisateur <br>
 Dashboard : statistiques principales (CA du jour, ventes, ruptures) <br>
@@ -70,7 +70,7 @@ Médicaments : gestion des stocks (admin uniquement) <br>
 Ventes : enregistrement et suivi des ventes <br>
 Utilisateurs : gestion des comptes (admin uniquement)
 
-<h3👨‍💻 Contribution>
+__👨‍💻 Contribution__
 
 Fork le projet
 Crée une branche (git checkout -b feature/ma-fonctionnalite) <br>
@@ -78,6 +78,6 @@ Commit (git commit -m 'Ajout d’une nouvelle fonctionnalité') <br>
 Push (git push origin feature/ma-fonctionnalite) <br>
 Crée une Pull Request
 
-<h3📜 Licence>
+__📜 Licence__
 
-Projet académique, libre d’utilisation pour l’amélioration de la gestion des pharmacies locales.
+_Projet académique, libre d’utilisation pour l’amélioration de la gestion des pharmacies locales._
