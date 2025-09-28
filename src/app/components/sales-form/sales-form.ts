@@ -31,6 +31,7 @@ export class SalesFormComponent implements OnInit {
       quantity: [1, [Validators.required, Validators.min(1)]],
       totalPrice: [0, [Validators.required, Validators.min(0)]]
     });
+    
   }
 
   ngOnInit(): void {

@@ -1,59 +1,106 @@
-# PharmaTrack
+📌 PharmaTrack — Gestion de Pharmacie (Angular)
+📖 Contexte
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+Dans les zones rurales au Burkina Faso, les dépôts pharmaceutiques manquent souvent d’outils numériques.
+PharmaTrack est une application simple et légère permettant :
 
-## Development server
+le suivi du stock de médicaments,
 
-To start a local development server, run:
+la gestion des ventes,
 
-```bash
-ng serve
-```
+les alertes automatiques en cas de rupture,
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+un tableau de bord avec statistiques et indicateurs.
 
-## Code scaffolding
+🚀 Fonctionnalités
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Gestion des médicaments : CRUD complet (ajouter, modifier, supprimer, lister).
 
-```bash
-ng generate component component-name
-```
+Ventes : enregistrement des ventes, décrément automatique du stock, calcul du chiffre d’affaires.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Dashboard : chiffre d’affaires du jour, médicaments en rupture, graphique des ventes.
 
-```bash
-ng generate --help
-```
+Authentification simplifiée : admin / utilisateur avec guards.
 
-## Building
+API REST mockée avec json-server.
 
-To build the project run:
+🛠️ Installation
+1️⃣ Prérequis
 
-```bash
-ng build
-```
+Node.js (v18 ou plus recommandé) → Télécharger ici
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Angular CLI installé globalement :
 
-## Running unit tests
+npm install -g @angular/cli
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
+json-server pour simuler l’API REST :
 
-## Running end-to-end tests
+npm install -g json-server
 
-For end-to-end (e2e) testing, run:
+2️⃣ Cloner le projet
+git clone https://github.com/ton-utilisateur/pharmatrack.git
+cd pharmatrack
 
-```bash
-ng e2e
-```
+3️⃣ Installer les dépendances
+npm install
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+4️⃣ Lancer l’API REST (json-server)
 
-## Additional Resources
+Dans un terminal séparé, exécuter :
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+json-server --watch db.json --port 3000
+
+
+👉 L’API sera disponible sur http://localhost:3000.
+
+Endpoints simulés :
+
+http://localhost:3000/medicines → gestion des médicaments
+
+http://localhost:3000/sales → gestion des ventes
+
+http://localhost:3000/users → gestion des utilisateurs
+
+5️⃣ Lancer l’application Angular
+ng serve -o
+
+
+👉 L’application sera disponible sur http://localhost:4200/.
+
+🔑 Authentification
+
+Deux types d’utilisateurs sont gérés :
+
+Admin → accès complet (stocks + utilisateurs + ventes).
+
+Utilisateur → accès limité (ventes et dashboard).
+
+
+📊 Aperçu rapide des pages
+
+Login : connexion admin / utilisateur
+
+Dashboard : statistiques principales (CA du jour, ventes, ruptures)
+
+Médicaments : gestion des stocks (admin uniquement)
+
+Ventes : enregistrement et suivi des ventes
+
+Utilisateurs : gestion des comptes (admin uniquement)
+
+👨‍💻 Contribution
+
+Fork le projet
+
+Crée une branche (git checkout -b feature/ma-fonctionnalite)
+
+Commit (git commit -m 'Ajout d’une nouvelle fonctionnalité')
+
+Push (git push origin feature/ma-fonctionnalite)
+
+Crée une Pull Request
+
+📜 Licence
+
+Projet académique, libre d’utilisation pour l’amélioration de la gestion des pharmacies locales.

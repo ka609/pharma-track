@@ -54,6 +54,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/sales-form/sales-form')
       .then(m => m.SalesFormComponent),
     canActivate: [authGuard]
+    
   },
 
   { // Utilisateurs uniquement admin
