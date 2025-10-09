@@ -87,8 +87,8 @@ Deux types d’utilisateurs sont gérés :
 
 ## 🎥 Démonstration
 
-Une vidéo de démonstration est disponible dans le dossier [`/demo`](./demo/video.mp4).  
-👉 [Clique ici pour voir la vidéo](./demo/video.mp4)
+Une vidéo de démonstration est disponible dans le dossier [`/demo`](./demo/Video.mp4).  
+👉 [Clique ici pour voir la vidéo](./demo/Video.mp4)
 
 ---
 
